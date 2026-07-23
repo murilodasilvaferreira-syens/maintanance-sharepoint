@@ -1,6 +1,25 @@
 {
   "atualizado_em": "2026-07-23T08:00:00Z",
-  "indicadores": [
-    { "id": "Custo Bruto", "valor": 128.5, "unidade": "horas", "tendencia": "up", "variacao": 4.2 },
+  "atualizacao_texto": "23/07/2026 08:00",
+  "periodo_semana": "Semana de 20/07 a 23/07",
+  "maturacao_aviso": "Mês corrente incompleto (~52% dos apontamentos lançados).",
+  "totais": {
+    "ordens_fechadas_hoje": 4,
+    "ordens_fechadas_semana": 38,
+    "ordens_fechadas_mes": 142,
+    "ordens_criadas_semana": 41,
+    "ordens_criadas_mes": 156,
+    "horas_apontadas_semana": 486.5,
+    "horas_apontadas_mes": 1920.0,
+    "backlog_horas": 1240.0,
+    "backlog_ordens": 87
+  },
+  "por_disciplina": [
+    { "[disciplina]": "Mecânica",        "[OrdensFechadasSemana]": 14, "[HorasApontadasSemana]": 180.5 },
+    { "[disciplina]": "Elétrica",        "[OrdensFechadasSemana]": 8,  "[HorasApontadasSemana]": 92.0 },
+    { "[disciplina]": "Instrumentação",  "[OrdensFechadasSemana]": 6,  "[HorasApontadasSemana]": 74.0 },
+    { "[disciplina]": "Automação",       "[OrdensFechadasSemana]": 5,  "[HorasApontadasSemana]": 68.0 },
+    { "[disciplina]": "Preditiva",       "[OrdensFechadasSemana]": 3,  "[HorasApontadasSemana]": 42.0 },
+    { "[disciplina]": "Apoio",           "[OrdensFechadasSemana]": 2,  "[HorasApontadasSemana]": 30.0 }
   ]
 }
