@@ -1,0 +1,6 @@
+{
+  "atualizado_em": "2026-07-23T08:00:00Z",
+  "indicadores": [
+    { "id": "Custo Bruto", "valor": 128.5, "unidade": "horas", "tendencia": "up", "variacao": 4.2 },
+  ]
+}
