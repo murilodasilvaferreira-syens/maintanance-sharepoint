@@ -1,96 +1,77 @@
-// ============ SAUDAÇÃO + DATA + RELÓGIO ============
-function atualizarSaudacao() {
-  const agora = new Date();
-  const hora = agora.getHours();
-  let saudacao = 'Bom dia';
-  if (hora >= 12 && hora < 18) saudacao = 'Boa tarde';
-  else if (hora >= 18 || hora < 5) saudacao = 'Boa noite';
+let chartDisc, chartHoras;
 
-  // Nome: como o iframe não acessa o usuário do SharePoint,
-  // você pode passar por parâmetro na URL: ...?nome=Murilo
-  const params = new URLSearchParams(window.location.search);
-  const nome = params.get('nome');
-  const alvo = document.getElementById('welcomeMsg');
-  if (nome) {
-    alvo.textContent = `👋 ${saudacao}, ${nome}!`;
-  } else {
-    alvo.textContent = `👋 ${saudacao}! Bem-vindo à Central de Manutenção`;
-  }
+function saudacaoHora(){const h=new Date().getHours();return h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';}
 
-  const opcoes = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  document.getElementById('currentDate').textContent =
-    agora.toLocaleDateString('pt-BR', opcoes);
+function initBanner(){
+  const agora=new Date();
+  const params=new URLSearchParams(location.search);
+  const nome=params.get('nome');
+  document.getElementById('welcomeMsg').textContent=
+    '👋 '+saudacaoHora()+(nome?`, ${nome}!`:'! Central de Manutenção');
+  document.getElementById('currentDate').textContent=
+    agora.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  tick();setInterval(tick,30000);
+}
+function tick(){const d=new Date();document.getElementById('clock').textContent=
+  String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+
+function animar(el,alvo,dec){
+  const dur=1200,ini=performance.now();
+  function step(t){const p=Math.min((t-ini)/dur,1);const e=1-Math.pow(1-p,3);
+    el.textContent=Number((alvo*e).toFixed(dec)).toLocaleString('pt-BR');
+    if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
 }
 
-function atualizarRelogio() {
-  const agora = new Date();
-  const h = String(agora.getHours()).padStart(2, '0');
-  const m = String(agora.getMinutes()).padStart(2, '0');
-  document.getElementById('clock').textContent = `${h}:${m}`;
+async function carregar(){
+  try{
+    const r=await fetch('dados.json?t='+Date.now());
+    if(!r.ok)throw new Error(r.status);
+    const d=await r.json();
+
+    // KPIs
+    document.querySelectorAll('[data-kpi]').forEach(card=>{
+      const key=card.dataset.kpi;
+      const val=d.totais?.[key];
+      const el=card.querySelector('.kpi-value');
+      if(el&&val!=null)animar(el,val,parseInt(el.dataset.decimals||'0',10));
+    });
+    // Subvalores
+    document.querySelectorAll('[data-kpi-sub]').forEach(el=>{
+      const key=el.dataset.kpiSub;const val=d.totais?.[key];
+      if(val!=null){
+        const txt=el.textContent.replace(/^—\s*/,'');
+        el.textContent=Number(val).toLocaleString('pt-BR')+' '+txt.replace(/^\d+\s*/,'');
+      }
+    });
+
+    // Contexto
+    if(d.periodo_semana)document.getElementById('periodoSemana').textContent=d.periodo_semana;
+    if(d.maturacao_aviso)document.getElementById('maturacaoAviso').textContent='⚠️ '+d.maturacao_aviso;
+    if(d.atualizacao_texto)document.getElementById('badgeAtualizacao').textContent='Atualizado '+d.atualizacao_texto;
+
+    // Gráficos por disciplina
+    const disc=(d.por_disciplina||[]).map(x=>x['[disciplina]']||x.disciplina);
+    const ordens=(d.por_disciplina||[]).map(x=>x['[OrdensFechadasSemana]']??x.OrdensFechadasSemana??0);
+    const horas=(d.por_disciplina||[]).map(x=>x['[HorasApontadasSemana]']??x.HorasApontadasSemana??0);
+    desenharGraficos(disc,ordens,horas);
+
+  }catch(e){console.warn('Falha ao carregar dados.json',e);}
 }
 
-// ============ ANIMAÇÃO DOS NÚMEROS (COUNT-UP) ============
-function animarNumeros() {
-  document.querySelectorAll('.kpi-value').forEach(el => {
-    const alvo = parseFloat(el.dataset.target);
-    const dec = parseInt(el.dataset.decimals || '0', 10);
-    const duracao = 1400;
-    const inicio = performance.now();
-    function passo(t) {
-      const prog = Math.min((t - inicio) / duracao, 1);
-      const ease = 1 - Math.pow(1 - prog, 3);
-      const valor = (alvo * ease).toFixed(dec);
-      el.textContent = Number(valor).toLocaleString('pt-BR');
-      if (prog < 1) requestAnimationFrame(passo);
-    }
-    requestAnimationFrame(passo);
-  });
+function desenharGraficos(labels,ordens,horas){
+  const c1=document.getElementById('chartDisciplina');
+  const c2=document.getElementById('chartHoras');
+  if(chartDisc)chartDisc.destroy();if(chartHoras)chartHoras.destroy();
+  const grid={color:'rgba(128,128,128,.15)'};
+  if(c1)chartDisc=new Chart(c1,{type:'bar',data:{labels,datasets:[{label:'Ordens',data:ordens,backgroundColor:'rgba(16,124,16,.75)',borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid},x:{grid:{display:false}}}}});
+  if(c2)chartHoras=new Chart(c2,{type:'bar',data:{labels,datasets:[{label:'Horas',data:horas,backgroundColor:'rgba(0,120,212,.75)',borderRadius:6}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid},y:{grid:{display:false}}}}});
 }
 
-// ============ TEMA CLARO/ESCURO ============
-document.getElementById('themeToggle').addEventListener('click', function () {
-  const atual = document.documentElement.getAttribute('data-theme');
-  const novo = atual === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', novo);
-  this.textContent = novo === 'dark' ? '☀️' : '🌙';
+document.getElementById('themeToggle').addEventListener('click',function(){
+  const novo=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',novo);
+  this.textContent=novo==='dark'?'☀️':'🌙';
 });
 
-// ============ GRÁFICO ============
-function criarGrafico() {
-  const ctx = document.getElementById('osChart');
-  if (!ctx || typeof Chart === 'undefined') return;
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-      datasets: [
-        {
-          label: 'OS Abertas',
-          data: [52, 48, 61, 55, 47, 47],
-          backgroundColor: 'rgba(0,120,212,.75)',
-          borderRadius: 6
-        },
-        {
-          label: 'OS Concluídas',
-          data: [45, 50, 54, 58, 44, 51],
-          backgroundColor: 'rgba(16,124,16,.75)',
-          borderRadius: 6
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { position: 'bottom' } },
-      scales: { y: { beginAtZero: true, grid: { color: 'rgba(128,128,128,.15)' } }, x: { grid: { display: false } } }
-    }
-  });
-}
-
-// ============ INICIALIZAÇÃO ============
-window.addEventListener('DOMContentLoaded', () => {
-  atualizarSaudacao();
-  atualizarRelogio();
-  setInterval(atualizarRelogio, 30000);
-  animarNumeros();
-  criarGrafico();
-});
+window.addEventListener('DOMContentLoaded',()=>{initBanner();carregar();setInterval(carregar,5*60*1000);});
