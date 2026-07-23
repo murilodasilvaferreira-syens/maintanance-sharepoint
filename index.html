@@ -3,100 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Central de Manutenção</title>
+  <title>Central de Manutenção — Itatiba</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="app">
-    <!-- ==================== BANNER DE BOAS-VINDAS ==================== -->
     <header class="welcome-banner">
       <div class="welcome-content">
         <div class="welcome-text">
-          <p class="welcome-date" id="currentDate">Carregando...</p>
-          <h1 class="welcome-title" id="welcomeMsg">👋 Bem-vindo à Central de Manutenção!</h1>
-          <p class="welcome-sub">Acompanhe os indicadores e a saúde operacional da equipe em tempo real.</p>
+          <p class="welcome-date" id="currentDate">—</p>
+          <h1 class="welcome-title" id="welcomeMsg">👋 Central de Manutenção</h1>
+          <p class="welcome-sub" id="periodoSemana">—</p>
         </div>
         <div class="welcome-clock" id="clock">--:--</div>
       </div>
       <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+      <div class="maturacao-aviso" id="maturacaoAviso"></div>
     </header>
 
-    <!-- ==================== CARDS DE KPI ==================== -->
+    <!-- KPIs OPERACIONAIS -->
+    <h2 class="section-title">📊 Indicadores Operacionais</h2>
     <section class="kpi-grid">
-      <div class="kpi-card" style="--accent:#0078d4">
-        <div class="kpi-icon">⏱️</div>
-        <div class="kpi-info">
-          <span class="kpi-label">MTBF</span>
-          <span class="kpi-value" data-target="128.5" data-decimals="1">0</span>
-          <span class="kpi-unit">horas</span>
-        </div>
-        <div class="kpi-trend up">▲ 4,2%</div>
-      </div>
-
-      <div class="kpi-card" style="--accent:#e3811c">
-        <div class="kpi-icon">🔧</div>
-        <div class="kpi-info">
-          <span class="kpi-label">MTTR</span>
-          <span class="kpi-value" data-target="3.2" data-decimals="1">0</span>
-          <span class="kpi-unit">horas</span>
-        </div>
-        <div class="kpi-trend down">▼ 1,1%</div>
-      </div>
-
-      <div class="kpi-card" style="--accent:#d13438">
+      <div class="kpi-card" data-kpi="backlog_horas" style="--accent:#d13438">
         <div class="kpi-icon">📋</div>
-        <div class="kpi-info">
-          <span class="kpi-label">Backlog de OS</span>
-          <span class="kpi-value" data-target="47" data-decimals="0">0</span>
-          <span class="kpi-unit">ordens</span>
-        </div>
-        <div class="kpi-trend up">▲ 6</div>
+        <div class="kpi-info"><span class="kpi-label">Backlog</span>
+          <span class="kpi-value" data-decimals="0">0</span><span class="kpi-unit">horas</span></div>
+        <div class="kpi-sub" data-kpi-sub="backlog_ordens">— ordens</div>
       </div>
-
-      <div class="kpi-card" style="--accent:#107c10">
+      <div class="kpi-card" data-kpi="ordens_fechadas_semana" style="--accent:#107c10">
         <div class="kpi-icon">✅</div>
-        <div class="kpi-info">
-          <span class="kpi-label">Disponibilidade</span>
-          <span class="kpi-value" data-target="98.2" data-decimals="1">0</span>
-          <span class="kpi-unit">%</span>
-        </div>
-        <div class="kpi-trend up">▲ 0,5%</div>
+        <div class="kpi-info"><span class="kpi-label">Ordens Fechadas</span>
+          <span class="kpi-value" data-decimals="0">0</span><span class="kpi-unit">na semana</span></div>
+        <div class="kpi-sub" data-kpi-sub="ordens_fechadas_mes">— no mês</div>
+      </div>
+      <div class="kpi-card" data-kpi="horas_apontadas_semana" style="--accent:#0078d4">
+        <div class="kpi-icon">⏱️</div>
+        <div class="kpi-info"><span class="kpi-label">Horas Apontadas</span>
+          <span class="kpi-value" data-decimals="1">0</span><span class="kpi-unit">na semana</span></div>
+        <div class="kpi-sub" data-kpi-sub="horas_apontadas_mes">— no mês</div>
+      </div>
+      <div class="kpi-card" data-kpi="ordens_criadas_semana" style="--accent:#e3811c">
+        <div class="kpi-icon">🆕</div>
+        <div class="kpi-info"><span class="kpi-label">Ordens Criadas</span>
+          <span class="kpi-value" data-decimals="0">0</span><span class="kpi-unit">na semana</span></div>
+        <div class="kpi-sub" data-kpi-sub="ordens_criadas_mes">— no mês</div>
       </div>
     </section>
 
-    <!-- ==================== GRÁFICO + ATALHOS ==================== -->
+    <!-- BALANÇO DEMANDA x ENTREGA -->
     <section class="content-grid">
       <div class="panel chart-panel">
-        <div class="panel-header">
-          <h2>Ordens de Serviço — Últimos 6 meses</h2>
-          <span class="panel-badge">Atualizado hoje</span>
-        </div>
-        <canvas id="osChart" height="140"></canvas>
+        <div class="panel-header"><h2>Ordens Fechadas por Disciplina (semana)</h2>
+          <span class="panel-badge" id="badgeAtualizacao">—</span></div>
+        <canvas id="chartDisciplina" height="150"></canvas>
       </div>
-
-      <div class="panel shortcuts-panel">
-        <div class="panel-header">
-          <h2>Atalhos rápidos</h2>
-        </div>
-        <div class="shortcuts">
-          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📝</span> Abrir OS</a>
-          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📊</span> Dashboard Power BI</a>
-          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📅</span> Plano de Manutenção</a>
-          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📦</span> Estoque de Peças</a>
-          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📚</span> Procedimentos</a>
-          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">☎️</span> Contatos</a>
-        </div>
+      <div class="panel chart-panel">
+        <div class="panel-header"><h2>Horas Apontadas por Disciplina (semana)</h2></div>
+        <canvas id="chartHoras" height="150"></canvas>
       </div>
     </section>
 
-    <footer class="app-footer">
-      Central de Manutenção • Desenvolvido para o SharePoint
-    </footer>
-  </div>
+    <!-- ATALHOS -->
+    <section class="panel shortcuts-panel">
+      <div class="panel-header"><h2>⚡ Atalhos rápidos</h2></div>
+      <div class="shortcuts">
+        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📝</span> Notas (IW29)</a>
+        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📋</span> Ordens (IW39)</a>
+        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📊</span> Power BI completo</a>
+        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">⏱️</span> Confirmações (IW47)</a>
+        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📦</span> Estoque de peças</a>
+        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📚</span> Procedimentos</a>
+      </div>
+    </section>
 
+    <footer class="app-footer" id="footer">Central de Manutenção • Itatiba</footer>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
