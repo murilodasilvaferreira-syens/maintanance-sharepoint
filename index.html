@@ -5,81 +5,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Central de Manutenção — Itatiba</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="app">
+
+    <!-- CABEÇALHO -->
     <header class="welcome-banner">
+      <button class="theme-toggle" id="themeToggle">Tema</button>
       <div class="welcome-content">
         <div class="welcome-text">
           <p class="welcome-date" id="currentDate">—</p>
-          <h1 class="welcome-title" id="welcomeMsg">👋 Central de Manutenção</h1>
+          <h1 class="welcome-title" id="welcomeMsg">Central de Manutenção</h1>
           <p class="welcome-sub" id="periodoSemana">—</p>
         </div>
         <div class="welcome-clock" id="clock">--:--</div>
       </div>
-      <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
       <div class="maturacao-aviso" id="maturacaoAviso"></div>
     </header>
 
-    <!-- KPIs OPERACIONAIS -->
-    <h2 class="section-title">📊 Indicadores Operacionais</h2>
+    <!-- INDICADORES OPERACIONAIS -->
+    <h2 class="section-title">Indicadores Operacionais</h2>
     <section class="kpi-grid">
-      <div class="kpi-card" data-kpi="backlog_horas" style="--accent:#d13438">
-        <div class="kpi-icon">📋</div>
-        <div class="kpi-info"><span class="kpi-label">Backlog</span>
-          <span class="kpi-value" data-decimals="0">0</span><span class="kpi-unit">horas</span></div>
-        <div class="kpi-sub" data-kpi-sub="backlog_ordens">— ordens</div>
+      <div class="kpi-card" data-kpi="backlog_horas">
+        <span class="kpi-label">Backlog</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="0">0</span>
+          <span class="kpi-unit">horas planejadas</span>
+        </div>
+        <span class="kpi-sub" data-kpi-sub="backlog_ordens" data-sufixo="ordens em fila">—</span>
       </div>
-      <div class="kpi-card" data-kpi="ordens_fechadas_semana" style="--accent:#107c10">
-        <div class="kpi-icon">✅</div>
-        <div class="kpi-info"><span class="kpi-label">Ordens Fechadas</span>
-          <span class="kpi-value" data-decimals="0">0</span><span class="kpi-unit">na semana</span></div>
-        <div class="kpi-sub" data-kpi-sub="ordens_fechadas_mes">— no mês</div>
+      <div class="kpi-card" data-kpi="ordens_fechadas_semana">
+        <span class="kpi-label">Ordens Fechadas</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="0">0</span>
+          <span class="kpi-unit">na semana</span>
+        </div>
+        <span class="kpi-sub" data-kpi-sub="ordens_fechadas_mes" data-sufixo="no mês">—</span>
       </div>
-      <div class="kpi-card" data-kpi="horas_apontadas_semana" style="--accent:#0078d4">
-        <div class="kpi-icon">⏱️</div>
-        <div class="kpi-info"><span class="kpi-label">Horas Apontadas</span>
-          <span class="kpi-value" data-decimals="1">0</span><span class="kpi-unit">na semana</span></div>
-        <div class="kpi-sub" data-kpi-sub="horas_apontadas_mes">— no mês</div>
+      <div class="kpi-card" data-kpi="horas_apontadas_semana">
+        <span class="kpi-label">Horas Apontadas</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="1">0</span>
+          <span class="kpi-unit">na semana</span>
+        </div>
+        <span class="kpi-sub" data-kpi-sub="horas_apontadas_mes" data-sufixo="no mês">—</span>
       </div>
-      <div class="kpi-card" data-kpi="ordens_criadas_semana" style="--accent:#e3811c">
-        <div class="kpi-icon">🆕</div>
-        <div class="kpi-info"><span class="kpi-label">Ordens Criadas</span>
-          <span class="kpi-value" data-decimals="0">0</span><span class="kpi-unit">na semana</span></div>
-        <div class="kpi-sub" data-kpi-sub="ordens_criadas_mes">— no mês</div>
+      <div class="kpi-card" data-kpi="ordens_criadas_semana">
+        <span class="kpi-label">Ordens Criadas</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="0">0</span>
+          <span class="kpi-unit">na semana</span>
+        </div>
+        <span class="kpi-sub" data-kpi-sub="ordens_criadas_mes" data-sufixo="no mês">—</span>
       </div>
     </section>
 
-    <!-- BALANÇO DEMANDA x ENTREGA -->
+    <!-- INDICADORES COMPLEMENTARES -->
+    <h2 class="section-title">Produção do Período</h2>
+    <section class="kpi-grid">
+      <div class="kpi-card" data-kpi="ordens_fechadas_hoje">
+        <span class="kpi-label">Fechadas Hoje</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="0">0</span>
+          <span class="kpi-unit">ordens</span>
+        </div>
+      </div>
+      <div class="kpi-card" data-kpi="horas_apontadas_hoje">
+        <span class="kpi-label">Horas Hoje</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="1">0</span>
+          <span class="kpi-unit">apontadas</span>
+        </div>
+      </div>
+      <div class="kpi-card" data-kpi="operacoes_concluidas_semana">
+        <span class="kpi-label">Operações</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="0">0</span>
+          <span class="kpi-unit">concluídas na semana</span>
+        </div>
+        <span class="kpi-sub" data-kpi-sub="operacoes_concluidas_mes" data-sufixo="no mês">—</span>
+      </div>
+      <div class="kpi-card" data-kpi="ordens_fechadas_mes">
+        <span class="kpi-label">Fechadas no Mês</span>
+        <div class="kpi-info">
+          <span class="kpi-value" data-decimals="0">0</span>
+          <span class="kpi-unit" id="periodoMes">—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRÁFICOS -->
+    <h2 class="section-title">Distribuição por Disciplina</h2>
     <section class="content-grid">
-      <div class="panel chart-panel">
-        <div class="panel-header"><h2>Ordens Fechadas por Disciplina (semana)</h2>
-          <span class="panel-badge" id="badgeAtualizacao">—</span></div>
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Ordens Fechadas na Semana</h2>
+          <span class="panel-badge" id="badgeAtualizacao">—</span>
+        </div>
         <canvas id="chartDisciplina" height="150"></canvas>
       </div>
-      <div class="panel chart-panel">
-        <div class="panel-header"><h2>Horas Apontadas por Disciplina (semana)</h2></div>
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Horas Apontadas na Semana</h2>
+        </div>
         <canvas id="chartHoras" height="150"></canvas>
       </div>
     </section>
 
     <!-- ATALHOS -->
-    <section class="panel shortcuts-panel">
-      <div class="panel-header"><h2>⚡ Atalhos rápidos</h2></div>
-      <div class="shortcuts">
-        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📝</span> Notas (IW29)</a>
-        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📋</span> Ordens (IW39)</a>
-        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📊</span> Power BI completo</a>
-        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">⏱️</span> Confirmações (IW47)</a>
-        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📦</span> Estoque de peças</a>
-        <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📚</span> Procedimentos</a>
-      </div>
+    <h2 class="section-title">Acessos</h2>
+    <section class="shortcuts">
+      <a class="shortcut" href="#" target="_blank">Notas de Manutenção (IW29)</a>
+      <a class="shortcut" href="#" target="_blank">Ordens (IW39)</a>
+      <a class="shortcut" href="#" target="_blank">Confirmações (IW47)</a>
+      <a class="shortcut" href="#" target="_blank">Power BI Completo</a>
+      <a class="shortcut" href="#" target="_blank">Estoque de Peças</a>
+      <a class="shortcut" href="#" target="_blank">Procedimentos</a>
     </section>
 
-    <footer class="app-footer" id="footer">Central de Manutenção • Itatiba</footer>
+    <footer class="app-footer" id="footer">Central de Manutenção · Planta Itatiba</footer>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
