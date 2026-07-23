@@ -1,6 +1,6 @@
 :root{
-  --bg:#ffffff;            /* off-white */
-  --surface:#fffdfa;      /* off-white mais claro */
+  --bg:#ffffff;           /* fundo branco */
+  --surface:#fffdfa;      /* cards off-white */
   --surface-alt:#f2efe9;
   --text:#1c1a17;         /* quase preto quente */
   --text-soft:#7a746c;
@@ -81,6 +81,10 @@ body{
 .panel-header h2{font-size:14px;font-weight:700;letter-spacing:.02em}
 .panel-badge{font-size:11px;color:var(--text-soft);letter-spacing:.06em;font-weight:600;text-transform:uppercase}
 
+/* ================= GRÁFICOS (responsivos) ================= */
+.chart-box{position:relative;height:300px;width:100%}
+.chart-box canvas{max-width:100%}
+
 /* ================= ATALHOS ================= */
 .shortcuts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .shortcut{
@@ -96,8 +100,7 @@ body{
 .app-footer{text-align:center;color:var(--text-soft);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding-top:12px;border-top:1px solid var(--line);font-weight:500}
 
 /* ================= RESPONSIVO ================= */
-
-/* Tablets grandes / notebooks pequenos */
+/* Notebooks pequenos */
 @media(max-width:1024px){
   .app{gap:28px}
   .welcome-title{font-size:30px}
@@ -115,7 +118,7 @@ body{
   .kpi-value{font-size:34px}
 }
 
-/* Celulares grandes */
+/* Celulares */
 @media(max-width:600px){
   body{padding:20px 12px}
   .app{gap:22px}
@@ -126,6 +129,7 @@ body{
   .kpi-value{font-size:32px}
   .kpi-card{padding:22px 20px}
   .panel{padding:20px 18px}
+  .chart-box{height:260px}
   .theme-toggle{position:static;margin-bottom:16px}
   .section-title{font-size:11px}
 }
