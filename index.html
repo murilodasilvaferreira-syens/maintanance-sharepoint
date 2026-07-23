@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central de Manutenção</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- ==================== BANNER DE BOAS-VINDAS ==================== -->
+    <header class="welcome-banner">
+      <div class="welcome-content">
+        <div class="welcome-text">
+          <p class="welcome-date" id="currentDate">Carregando...</p>
+          <h1 class="welcome-title" id="welcomeMsg">👋 Bem-vindo à Central de Manutenção!</h1>
+          <p class="welcome-sub">Acompanhe os indicadores e a saúde operacional da equipe em tempo real.</p>
+        </div>
+        <div class="welcome-clock" id="clock">--:--</div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+    </header>
+
+    <!-- ==================== CARDS DE KPI ==================== -->
+    <section class="kpi-grid">
+      <div class="kpi-card" style="--accent:#0078d4">
+        <div class="kpi-icon">⏱️</div>
+        <div class="kpi-info">
+          <span class="kpi-label">MTBF</span>
+          <span class="kpi-value" data-target="128.5" data-decimals="1">0</span>
+          <span class="kpi-unit">horas</span>
+        </div>
+        <div class="kpi-trend up">▲ 4,2%</div>
+      </div>
+
+      <div class="kpi-card" style="--accent:#e3811c">
+        <div class="kpi-icon">🔧</div>
+        <div class="kpi-info">
+          <span class="kpi-label">MTTR</span>
+          <span class="kpi-value" data-target="3.2" data-decimals="1">0</span>
+          <span class="kpi-unit">horas</span>
+        </div>
+        <div class="kpi-trend down">▼ 1,1%</div>
+      </div>
+
+      <div class="kpi-card" style="--accent:#d13438">
+        <div class="kpi-icon">📋</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Backlog de OS</span>
+          <span class="kpi-value" data-target="47" data-decimals="0">0</span>
+          <span class="kpi-unit">ordens</span>
+        </div>
+        <div class="kpi-trend up">▲ 6</div>
+      </div>
+
+      <div class="kpi-card" style="--accent:#107c10">
+        <div class="kpi-icon">✅</div>
+        <div class="kpi-info">
+          <span class="kpi-label">Disponibilidade</span>
+          <span class="kpi-value" data-target="98.2" data-decimals="1">0</span>
+          <span class="kpi-unit">%</span>
+        </div>
+        <div class="kpi-trend up">▲ 0,5%</div>
+      </div>
+    </section>
+
+    <!-- ==================== GRÁFICO + ATALHOS ==================== -->
+    <section class="content-grid">
+      <div class="panel chart-panel">
+        <div class="panel-header">
+          <h2>Ordens de Serviço — Últimos 6 meses</h2>
+          <span class="panel-badge">Atualizado hoje</span>
+        </div>
+        <canvas id="osChart" height="140"></canvas>
+      </div>
+
+      <div class="panel shortcuts-panel">
+        <div class="panel-header">
+          <h2>Atalhos rápidos</h2>
+        </div>
+        <div class="shortcuts">
+          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📝</span> Abrir OS</a>
+          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📊</span> Dashboard Power BI</a>
+          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📅</span> Plano de Manutenção</a>
+          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📦</span> Estoque de Peças</a>
+          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">📚</span> Procedimentos</a>
+          <a class="shortcut" href="#" target="_blank"><span class="sc-ic">☎️</span> Contatos</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      Central de Manutenção • Desenvolvido para o SharePoint
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
