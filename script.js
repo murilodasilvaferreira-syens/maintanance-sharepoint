@@ -67,34 +67,33 @@ function desenharGraficos(labels, ordens, horas) {
   const grid = { color: 'rgba(120,110,95,.12)' };
   const font = { family: 'Inter', size: 12 };
 
-  // ---- Gráfico 1: Ordens (ordenado da maior p/ menor) ----
-  const parOrdens = labels
-    .map((l, i) => ({ l, v: ordens[i] }))
-    .filter(x => x.v > 0)                       // remove disciplinas zeradas
-    .sort((a, b) => b.v - a.v);                 // ordena desc
-  const labelsOrd = parOrdens.map(x => x.l);
-  const dadosOrd = parOrdens.map(x => x.v);
+  // Gráfico 1: Ordens (ordenado desc)
+  const p1 = labels.map((l, i) => ({ l, v: ordens[i] })).filter(x => x.v > 0).sort((a, b) => b.v - a.v);
 
   if (c1) chartDisc = new Chart(c1, {
     type: 'bar',
-    data: { labels: labelsOrd, datasets: [{ data: dadosOrd, backgroundColor: '#e8701a', borderRadius: 2, barThickness: 22 }] },
-    options: { responsive: true, plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, grid, ticks: { font } }, x: { grid: { display: false }, ticks: { font } } } }
+    data: { labels: p1.map(x => x.l), datasets: [{ data: p1.map(x => x.v), backgroundColor: '#e8701a', borderRadius: 2, barThickness: 22 }] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,          // ← ADICIONADO
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, grid, ticks: { font } }, x: { grid: { display: false }, ticks: { font } } }
+    }
   });
 
-  // ---- Gráfico 2: Horas (ordenado da maior p/ menor) ----
-  const parHoras = labels
-    .map((l, i) => ({ l, v: horas[i] }))
-    .filter(x => x.v > 0)                       // remove zeradas
-    .sort((a, b) => b.v - a.v);                 // ordena desc
-  const labelsHrs = parHoras.map(x => x.l);
-  const dadosHrs = parHoras.map(x => x.v);
+  // Gráfico 2: Horas (ordenado desc)
+  const p2 = labels.map((l, i) => ({ l, v: horas[i] })).filter(x => x.v > 0).sort((a, b) => b.v - a.v);
 
   if (c2) chartHoras = new Chart(c2, {
     type: 'bar',
-    data: { labels: labelsHrs, datasets: [{ data: dadosHrs, backgroundColor: '#d15a1e', borderRadius: 2, barThickness: 22 }] },
-    options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
-      scales: { x: { beginAtZero: true, grid, ticks: { font } }, y: { grid: { display: false }, ticks: { font } } } }
+    data: { labels: p2.map(x => x.l), datasets: [{ data: p2.map(x => x.v), backgroundColor: '#d15a1e', borderRadius: 2, barThickness: 22 }] },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,          // ← ADICIONADO
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true, grid, ticks: { font } }, y: { grid: { display: false }, ticks: { font } } }
+    }
   });
 }
 
