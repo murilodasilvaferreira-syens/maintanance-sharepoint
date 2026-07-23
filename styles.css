@@ -96,12 +96,42 @@ body{
 .app-footer{text-align:center;color:var(--text-soft);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding-top:12px;border-top:1px solid var(--line);font-weight:500}
 
 /* ================= RESPONSIVO ================= */
+
+/* Tablets grandes / notebooks pequenos */
+@media(max-width:1024px){
+  .app{gap:28px}
+  .welcome-title{font-size:30px}
+}
+
+/* Tablets */
 @media(max-width:900px){
   body{padding:28px 16px}
   .kpi-grid{grid-template-columns:1fr 1fr}
   .content-grid{grid-template-columns:1fr}
-  .shortcuts{grid-template-columns:1fr}
-  .welcome-clock{display:none}
-  .welcome-title{font-size:28px}
+  .shortcuts{grid-template-columns:1fr 1fr}
+  .welcome-content{flex-direction:column;align-items:flex-start;gap:12px}
+  .welcome-clock{font-size:24px}
+  .welcome-title{font-size:26px}
+  .kpi-value{font-size:34px}
 }
-@media(max-width:520px){.kpi-grid{grid-template-columns:1fr}}
+
+/* Celulares grandes */
+@media(max-width:600px){
+  body{padding:20px 12px}
+  .app{gap:22px}
+  .kpi-grid{grid-template-columns:1fr}
+  .shortcuts{grid-template-columns:1fr}
+  .welcome-title{font-size:23px}
+  .welcome-clock{display:none}
+  .kpi-value{font-size:32px}
+  .kpi-card{padding:22px 20px}
+  .panel{padding:20px 18px}
+  .theme-toggle{position:static;margin-bottom:16px}
+  .section-title{font-size:11px}
+}
+
+/* Celulares pequenos */
+@media(max-width:380px){
+  .welcome-title{font-size:20px}
+  .kpi-value{font-size:28px}
+}
