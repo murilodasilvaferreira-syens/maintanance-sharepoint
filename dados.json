@@ -1,1 +1,29 @@
-{"atualizado_em":"2026-07-23T17:19:11.1377651Z","atualizacao_texto":"23/07/2026 17:19","periodo_semana":"Semana de 20/07 a 23/07","maturacao_aviso":"Mês corrente incompleto (~52% dos apontamentos lançados).","totais":{"ordens_fechadas_hoje":null,"ordens_fechadas_semana":null,"ordens_fechadas_mes":87,"ordens_criadas_semana":null,"ordens_criadas_mes":26,"horas_apontadas_semana":null,"horas_apontadas_mes":209,"backlog_horas":809.3,"backlog_ordens":244},"por_disciplina":[{},{"dim_centro_trabalho[disciplina]":"Apoio"},{"dim_centro_trabalho[disciplina]":"Automação"},{"dim_centro_trabalho[disciplina]":"Caldeiraria/Solda"},{"dim_centro_trabalho[disciplina]":"Civil"},{"dim_centro_trabalho[disciplina]":"Elétrica"},{"dim_centro_trabalho[disciplina]":"Elétrica/Mecânica"},{"dim_centro_trabalho[disciplina]":"Instrumentação"},{"dim_centro_trabalho[disciplina]":"Mecânica"},{"dim_centro_trabalho[disciplina]":"Outros"},{"dim_centro_trabalho[disciplina]":"Preditiva"},{"dim_centro_trabalho[disciplina]":"Tubulação"}]}
+{
+  "atualizado_em": "2026-07-23T08:00:00Z",
+  "atualizacao_texto": "23/07/2026 08:00",
+  "periodo_semana": "Semana de 20/07 a 23/07",
+  "periodo_mes": "julho/2026",
+  "maturacao_aviso": "Mês corrente incompleto (~52% dos apontamentos lançados).",
+  "totais": {
+    "ordens_fechadas_hoje": 4,
+    "ordens_fechadas_semana": 38,
+    "ordens_fechadas_mes": 142,
+    "ordens_criadas_semana": 41,
+    "ordens_criadas_mes": 156,
+    "horas_apontadas_hoje": 62.5,
+    "horas_apontadas_semana": 486.5,
+    "horas_apontadas_mes": 1920.0,
+    "operacoes_concluidas_semana": 54,
+    "operacoes_concluidas_mes": 208,
+    "backlog_horas": 1240.0,
+    "backlog_ordens": 87
+  },
+  "por_disciplina": [
+    { "[disciplina]": "Mecânica",       "[OrdensFechadasSemana]": 14, "[HorasApontadasSemana]": 180.5 },
+    { "[disciplina]": "Elétrica",       "[OrdensFechadasSemana]": 8,  "[HorasApontadasSemana]": 92.0 },
+    { "[disciplina]": "Instrumentação", "[OrdensFechadasSemana]": 6,  "[HorasApontadasSemana]": 74.0 },
+    { "[disciplina]": "Automação",      "[OrdensFechadasSemana]": 5,  "[HorasApontadasSemana]": 68.0 },
+    { "[disciplina]": "Preditiva",      "[OrdensFechadasSemana]": 3,  "[HorasApontadasSemana]": 42.0 },
+    { "[disciplina]": "Apoio",          "[OrdensFechadasSemana]": 2,  "[HorasApontadasSemana]": 30.0 }
+  ]
+}
