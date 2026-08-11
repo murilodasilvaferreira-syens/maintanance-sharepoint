@@ -13,52 +13,84 @@
 
     <!-- CABEÇALHO -->
     <header class="welcome-banner">
-      <button class="theme-toggle" id="themeToggle">Tema</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        <span class="icon-sun"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg></span>
+        <span class="icon-moon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+      </button>
       <div class="welcome-content">
         <div class="welcome-text">
           <p class="welcome-date" id="currentDate">—</p>
           <h1 class="welcome-title" id="welcomeMsg">Central de Manutenção</h1>
           <p class="welcome-sub" id="periodoSemana">—</p>
         </div>
-        <div class="welcome-clock" id="clock">--:--</div>
+        <div class="welcome-clock-wrap">
+          <span class="live-tag"><span class="pulse-dot"></span>Ao vivo</span>
+          <div class="welcome-clock" id="clock">--:--</div>
+        </div>
       </div>
-      <div class="maturacao-aviso" id="maturacaoAviso"></div>
+      <p class="maturacao-aviso" id="maturacaoAviso" hidden>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.2 2 18.5A1.8 1.8 0 0 0 3.5 21.2h17a1.8 1.8 0 0 0 1.5-2.7L13.7 4.2a1.8 1.8 0 0 0-3.4 0z"/><line x1="12" y1="9.5" x2="12" y2="13.5"/><line x1="12" y1="16.7" x2="12" y2="16.71"/></svg>
+        <span id="maturacaoTexto"></span>
+      </p>
     </header>
 
     <!-- INDICADORES OPERACIONAIS -->
     <h2 class="section-title">Indicadores Operacionais</h2>
     <section class="kpi-grid">
       <div class="kpi-card" data-kpi="backlog_horas">
-        <span class="kpi-label">Backlog</span>
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg></span>
+          <span class="kpi-label">Backlog</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="0">0</span>
           <span class="kpi-unit">horas planejadas</span>
         </div>
-        <span class="kpi-sub" data-kpi-sub="backlog_ordens" data-sufixo="ordens em fila">—</span>
+        <div class="kpi-foot">
+          <span class="kpi-sub" data-kpi-sub="backlog_ordens" data-sufixo="ordens em fila">—</span>
+        </div>
       </div>
-      <div class="kpi-card" data-kpi="ordens_fechadas_semana">
-        <span class="kpi-label">Ordens Fechadas</span>
+      <div class="kpi-card" data-kpi="ordens_fechadas_semana" data-meter="true">
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 11.1V12a9.5 9.5 0 1 1-5.64-8.68"/><polyline points="21.5 4 12 13.51 9 10.51"/></svg></span>
+          <span class="kpi-label">Ordens Fechadas</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="0">0</span>
           <span class="kpi-unit">na semana</span>
         </div>
-        <span class="kpi-sub" data-kpi-sub="ordens_fechadas_mes" data-sufixo="no mês">—</span>
+        <div class="kpi-foot">
+          <div class="kpi-meter-track"><div class="kpi-meter-fill"></div></div>
+          <span class="kpi-sub" data-kpi-sub="ordens_fechadas_mes" data-sufixo="no mês">—</span>
+        </div>
       </div>
-      <div class="kpi-card" data-kpi="horas_apontadas_semana">
-        <span class="kpi-label">Horas Apontadas</span>
+      <div class="kpi-card" data-kpi="horas_apontadas_semana" data-meter="true">
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="12 6.5 12 12 16 14.5"/></svg></span>
+          <span class="kpi-label">Horas Apontadas</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="1">0</span>
           <span class="kpi-unit">na semana</span>
         </div>
-        <span class="kpi-sub" data-kpi-sub="horas_apontadas_mes" data-sufixo="no mês">—</span>
+        <div class="kpi-foot">
+          <div class="kpi-meter-track"><div class="kpi-meter-fill"></div></div>
+          <span class="kpi-sub" data-kpi-sub="horas_apontadas_mes" data-sufixo="no mês">—</span>
+        </div>
       </div>
-      <div class="kpi-card" data-kpi="ordens_criadas_semana">
-        <span class="kpi-label">Ordens Criadas</span>
+      <div class="kpi-card" data-kpi="ordens_criadas_semana" data-meter="true">
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><line x1="12" y1="7.5" x2="12" y2="16.5"/><line x1="7.5" y1="12" x2="16.5" y2="12"/></svg></span>
+          <span class="kpi-label">Ordens Criadas</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="0">0</span>
           <span class="kpi-unit">na semana</span>
         </div>
-        <span class="kpi-sub" data-kpi-sub="ordens_criadas_mes" data-sufixo="no mês">—</span>
+        <div class="kpi-foot">
+          <div class="kpi-meter-track"><div class="kpi-meter-fill"></div></div>
+          <span class="kpi-sub" data-kpi-sub="ordens_criadas_mes" data-sufixo="no mês">—</span>
+        </div>
       </div>
     </section>
 
@@ -66,29 +98,44 @@
     <h2 class="section-title">Produção do Período</h2>
     <section class="kpi-grid">
       <div class="kpi-card" data-kpi="ordens_fechadas_hoje">
-        <span class="kpi-label">Fechadas Hoje</span>
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="2.2"/><line x1="16" y1="2.7" x2="16" y2="6.3"/><line x1="8" y1="2.7" x2="8" y2="6.3"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><polyline points="8.5 14.5 10.7 16.7 15 12.5"/></svg></span>
+          <span class="kpi-label">Fechadas Hoje</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="0">0</span>
           <span class="kpi-unit">ordens</span>
         </div>
       </div>
       <div class="kpi-card" data-kpi="horas_apontadas_hoje">
-        <span class="kpi-label">Horas Hoje</span>
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="12 6.5 12 12 16 14.5"/></svg></span>
+          <span class="kpi-label">Horas Hoje</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="1">0</span>
           <span class="kpi-unit">apontadas</span>
         </div>
       </div>
-      <div class="kpi-card" data-kpi="operacoes_concluidas_semana">
-        <span class="kpi-label">Operações</span>
+      <div class="kpi-card" data-kpi="operacoes_concluidas_semana" data-meter="true">
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11.5 12 14.5 22 4.5"/><path d="M21 12.5v6.8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h11"/></svg></span>
+          <span class="kpi-label">Operações</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="0">0</span>
           <span class="kpi-unit">concluídas na semana</span>
         </div>
-        <span class="kpi-sub" data-kpi-sub="operacoes_concluidas_mes" data-sufixo="no mês">—</span>
+        <div class="kpi-foot">
+          <div class="kpi-meter-track"><div class="kpi-meter-fill"></div></div>
+          <span class="kpi-sub" data-kpi-sub="operacoes_concluidas_mes" data-sufixo="no mês">—</span>
+        </div>
       </div>
       <div class="kpi-card" data-kpi="ordens_fechadas_mes">
-        <span class="kpi-label">Fechadas no Mês</span>
+        <div class="kpi-top">
+          <span class="kpi-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="2.2"/><line x1="16" y1="2.7" x2="16" y2="6.3"/><line x1="8" y1="2.7" x2="8" y2="6.3"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/></svg></span>
+          <span class="kpi-label">Fechadas no Mês</span>
+        </div>
         <div class="kpi-info">
           <span class="kpi-value" data-decimals="0">0</span>
           <span class="kpi-unit" id="periodoMes">—</span>
@@ -104,25 +151,61 @@
           <h2>Ordens Fechadas na Semana</h2>
           <span class="panel-badge" id="badgeAtualizacao">—</span>
         </div>
-        <div class="chart-box"><canvas id="chartDisciplina"></canvas></div>
+        <div class="chart-box">
+          <canvas id="chartDisciplina"></canvas>
+          <div class="chart-empty" id="emptyDisciplina" hidden>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+            <span>Nenhuma ordem fechada por disciplina nesta semana</span>
+          </div>
+        </div>
       </div>
       <div class="panel">
         <div class="panel-header">
           <h2>Horas Apontadas na Semana</h2>
         </div>
-        <div class="chart-box"><canvas id="chartHoras"></canvas></div>
+        <div class="chart-box">
+          <canvas id="chartHoras"></canvas>
+          <div class="chart-empty" id="emptyHoras" hidden>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+            <span>Nenhuma hora apontada por disciplina nesta semana</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ATALHOS -->
     <h2 class="section-title">Acessos</h2>
     <section class="shortcuts">
-      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7B3C2E63BE-2651-42EA-B3DF-CD11B91BF043%7D&file=PROGRAMA%C3%87%C3%83O%20DE%20MANUTEN%C3%87%C3%83O%202026%20ITATIBA%20NOVO.xlsx&action=default&mobileredirect=true" target="_blank" rel="noopener">Programação de Manutenção 2026</a>
-      <a class="shortcut" href="https://syensqosa-my.sharepoint.com/:x:/r/personal/micael_ribeiro_syensqo_com/_layouts/15/Doc.aspx?sourcedoc=%7BDAD9E7D5-BC88-5EEA-672B-D9CD2988D474%7D&file=Cronograma%20de%20Produ%C3%A7%C3%A3o_2026.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1" target="_blank">Cronograma de Produção</a>
-      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7B28C21657-D199-4F0D-94BD-E9B36E0965CD%7D&file=CRONOGRAMA%20GERAL%20MANUTEN%C3%87%C3%83O%20ITATIBA%20%20.xlsx&action=default&mobileredirect=true" target="_blank">Cronograma Geral</a>
-      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7BB6B710D8-9EF5-4EED-BF92-C0BC81CEB072%7D&file=PREPARA%C3%87%C3%83O%20MANUTEN%C3%87%C3%83O%20-%20QSSB%20ITATIBA%202026%20-%20Novo.xlsx&action=default&mobileredirect=true" target="_blank">Preparação de Materiais</a>
-      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/GBU%20PC-ITA-DIGITAL-OPS-LATAM/_layouts/15/Doc.aspx?sourcedoc=%7B2F3D342F-F200-4C39-92A7-A4C3F8D50746%7D&file=M365%20Migration%20-%20PowerApps%20%26%20Power%20BI.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1" target="_blank">M365 Migration - Power Apps & BI</a>
-      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7BD2909C12-DDEB-413D-8B97-0F1F56A6E4B7%7D&file=REUNI%C3%83O%20MANUTEN%C3%87%C3%83O%202026%20NOVO.xlsx&action=default&mobileredirect=true" target="_blank">Reunião Manutenção</a>
+      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7B3C2E63BE-2651-42EA-B3DF-CD11B91BF043%7D&file=PROGRAMA%C3%87%C3%83O%20DE%20MANUTEN%C3%87%C3%83O%202026%20ITATIBA%20NOVO.xlsx&action=default&mobileredirect=true" target="_blank" rel="noopener">
+        <span class="shortcut-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg></span>
+        <span class="shortcut-label">Programação de Manutenção 2026</span>
+        <span class="shortcut-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+      <a class="shortcut" href="https://syensqosa-my.sharepoint.com/:x:/r/personal/micael_ribeiro_syensqo_com/_layouts/15/Doc.aspx?sourcedoc=%7BDAD9E7D5-BC88-5EEA-672B-D9CD2988D474%7D&file=Cronograma%20de%20Produ%C3%A7%C3%A3o_2026.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1" target="_blank">
+        <span class="shortcut-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg></span>
+        <span class="shortcut-label">Cronograma de Produção</span>
+        <span class="shortcut-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7B28C21657-D199-4F0D-94BD-E9B36E0965CD%7D&file=CRONOGRAMA%20GERAL%20MANUTEN%C3%87%C3%83O%20ITATIBA%20%20.xlsx&action=default&mobileredirect=true" target="_blank">
+        <span class="shortcut-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg></span>
+        <span class="shortcut-label">Cronograma Geral</span>
+        <span class="shortcut-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/GBU%20PC-ITA-DIGITAL-OPS-LATAM/_layouts/15/Doc.aspx?sourcedoc=%7B2F3D342F-F200-4C39-92A7-A4C3F8D50746%7D&file=M365%20Migration%20-%20PowerApps%20%26%20Power%20BI.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1" target="_blank">
+        <span class="shortcut-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg></span>
+        <span class="shortcut-label">M365 Migration - Power Apps &amp; BI</span>
+        <span class="shortcut-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7BB6B710D8-9EF5-4EED-BF92-C0BC81CEB072%7D&file=PREPARA%C3%87%C3%83O%20MANUTEN%C3%87%C3%83O%20-%20QSSB%20ITATIBA%202026%20-%20Novo.xlsx&action=default&mobileredirect=true" target="_blank">
+        <span class="shortcut-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg></span>
+        <span class="shortcut-label">Preparação de Materiais</span>
+        <span class="shortcut-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
+      <a class="shortcut" href="https://syensqosa.sharepoint.com/:x:/r/sites/shditatibamanutenodocumentosscop1findustrial/_layouts/15/Doc.aspx?sourcedoc=%7BD2909C12-DDEB-413D-8B97-0F1F56A6E4B7%7D&file=REUNI%C3%83O%20MANUTEN%C3%87%C3%83O%202026%20NOVO.xlsx&action=default&mobileredirect=true" target="_blank">
+        <span class="shortcut-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg></span>
+        <span class="shortcut-label">Reunião Manutenção</span>
+        <span class="shortcut-arrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+      </a>
     </section>
 
     <footer class="app-footer" id="footer">Central de Manutenção · Planta Itatiba</footer>
